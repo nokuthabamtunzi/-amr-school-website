@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <rect width="1200" height="900" fill="#f0f9ff"/>
+  <rect x="0" y="630" width="1200" height="270" fill="#e0f2fe"/>
+  <rect x="120" y="210" width="960" height="350" rx="28" fill="#ffffff" opacity="0.85"/>
+  <rect x="190" y="280" width="220" height="220" rx="20" fill="#dbeafe"/>
+  <rect x="470" y="280" width="220" height="220" rx="20" fill="#bae6fd"/>
+  <rect x="750" y="280" width="220" height="220" rx="20" fill="#7dd3fc"/>
+  <text x="150" y="760" font-size="56" font-family="Arial, sans-serif" font-weight="700" fill="#0f172a">Classroom</text>
+</svg>

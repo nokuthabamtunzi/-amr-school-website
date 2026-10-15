@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <rect width="200" height="200" rx="28" fill="#f0f9ff"/>
+  <path d="M55 145 L100 50 L145 145 Z" fill="#0ea5e9"/>
+  <circle cx="100" cy="90" r="18" fill="#ffffff"/>
+  <text x="100" y="185" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" fill="#0f172a">ECD</text>
+</svg>

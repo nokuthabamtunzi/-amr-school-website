@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <rect width="1200" height="900" fill="#f0f9ff"/>
+  <rect x="0" y="620" width="1200" height="280" fill="#dbeafe"/>
+  <circle cx="220" cy="180" r="80" fill="#7dd3fc" opacity="0.4"/>
+  <rect x="120" y="230" width="960" height="310" rx="30" fill="#ffffff" opacity="0.8"/>
+  <circle cx="310" cy="360" r="80" fill="#bae6fd"/>
+  <circle cx="620" cy="360" r="80" fill="#7dd3fc"/>
+  <circle cx="930" cy="360" r="80" fill="#bfdbfe"/>
+  <text x="150" y="760" font-size="56" font-family="Arial, sans-serif" font-weight="700" fill="#0f172a">ECD Learning</text>
+</svg>

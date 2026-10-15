@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <rect width="1200" height="900" fill="#e0f2fe"/>
+  <rect x="0" y="640" width="1200" height="260" fill="#dbeafe"/>
+  <rect x="120" y="240" width="960" height="290" rx="28" fill="#ffffff" opacity="0.8"/>
+  <rect x="180" y="300" width="210" height="180" rx="18" fill="#bae6fd"/>
+  <rect x="430" y="300" width="210" height="180" rx="18" fill="#7dd3fc"/>
+  <rect x="680" y="300" width="210" height="180" rx="18" fill="#93c5fd"/>
+  <rect x="930" y="300" width="90" height="180" rx="18" fill="#bfdbfe"/>
+  <text x="150" y="760" font-size="56" font-family="Arial, sans-serif" font-weight="700" fill="#0f172a">Campus</text>
+</svg>
