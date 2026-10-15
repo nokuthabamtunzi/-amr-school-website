@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, MapPin, Star } from 'lucide-react';
-import { siteData } from '../lib/site-data';
-import { PrimaryButton, SecondaryButton, SectionTitle, features } from '../lib/site-data';
 import { MOTTO } from '../config/site';
+import { PrimaryButton, SecondaryButton, SectionTitle, features, siteData } from '../lib/site-data';
 
 export default function HomePage() {
   return (
@@ -20,6 +19,7 @@ export default function HomePage() {
               <SecondaryButton href="/contact">Visit Us</SecondaryButton>
             </div>
           </div>
+
           <div className="relative">
             <div className="grid gap-4 sm:grid-cols-2">
               {siteData.heroSlides.slice(0, 2).map((slide, index) => (

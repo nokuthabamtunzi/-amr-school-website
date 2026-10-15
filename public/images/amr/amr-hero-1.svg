@@ -1,50 +1,70 @@
-import Link from 'next/link';
-import { ADDRESS, FACEBOOK_URL, GOOGLE_ACCOUNT_EMAIL, SCHOOL_EMAIL, SCHOOL_LOGO_PATHS, SCHOOL_PHONE } from '../config/site';
+# AMR Primary School with ECD
 
-export default function Footer() {
-  return (
-    <footer className="mt-8 border-t border-sky-100 bg-white">
-      <div className="mx-auto max-w-7xl px-4 py-12 md:px-8">
-        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
-          <div>
-            <h3 className="text-lg font-bold text-slate-900">AMR Primary School</h3>
-            <p className="mt-4 text-slate-600">A caring ECD and primary school where every child is nurtured to grow with confidence, joy and purpose.</p>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-600">Quick links</h4>
-            <ul className="mt-4 space-y-2 text-slate-600">
-              <li><Link href="/about">About Us</Link></li>
-              <li><Link href="/academics">Academics</Link></li>
-              <li><Link href="/admissions">Admissions</Link></li>
-              <li><Link href="/contact">Contact</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-600">Contact</h4>
-            <ul className="mt-4 space-y-2 text-slate-600">
-              <li>{ADDRESS}</li>
-              <li>{SCHOOL_EMAIL}</li>
-              <li>{SCHOOL_PHONE}</li>
-              <li>{GOOGLE_ACCOUNT_EMAIL}</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-600">Follow us</h4>
-            <ul className="mt-4 space-y-2 text-slate-600">
-              <li><a href={FACEBOOK_URL}>Facebook</a></li>
-              <li><Link href="/gallery">Gallery</Link></li>
-              <li><Link href="/news">News & Events</Link></li>
-            </ul>
-          </div>
-        </div>
-      </div>
+This project is a premium, mobile-first school website for AMR Primary School with ECD in Zimbabwe. It is built with Next.js 14, TypeScript, Tailwind CSS and Supabase.
 
-      <div className="border-t border-sky-100 bg-sky-50 py-6">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-3 px-4 text-center md:px-8">
-          <img src={SCHOOL_LOGO_PATHS.branding} alt="My branding logo" className="h-20 w-20 opacity-60" />
-          <p className="text-sm text-slate-600">Website by Your Brand</p>
-        </div>
-      </div>
-    </footer>
-  );
-}
+## Install and run
+
+```bash
+npm install
+cp .env.example .env.local
+npm run dev
+```
+
+Open http://localhost:3000.
+
+## Add your AMR photos
+Place your photos in:
+
+- `/public/images/amr/`
+
+Recommended placeholders:
+- `amr-hero-1.svg`
+- `amr-hero-2.svg`
+- `amr-hero-3.svg`
+- `campus-1.svg`
+- `class-1.svg`
+- `ecd-1.svg`
+- `students-1.svg`
+
+## Add your logos
+Place your school or branding images in:
+
+- `/public/images/logos/`
+
+Files to swap later:
+- `logo-1.svg`
+- `logo-2.svg`
+- `my-branding-logo.svg`
+
+## Update school settings
+Edit `/config/site.ts` to update:
+- `SITE_NAME`
+- `MOTTO`
+- `SCHOOL_EMAIL`
+- `SCHOOL_PHONE`
+- `WHATSAPP_NUMBER`
+- `ADDRESS`
+- `GOOGLE_MAP_EMBED_URL`
+- `FACEBOOK_URL`
+- `GOOGLE_ACCOUNT_EMAIL`
+- `SCHOOL_LOGO_PATHS`
+
+## Supabase setup
+1. Create a Supabase project.
+2. Run `/supabase.sql` in the SQL editor.
+3. Create Storage buckets:
+   - `amr-gallery`
+   - `amr-logos`
+4. Add `.env.local` values from `.env.example`.
+
+## Admin dashboard
+Visit `/admin` and sign in with a Supabase Auth email/password account. The admin dashboard supports:
+- gallery photo uploads
+- logo replacement
+- stats overview
+
+## Deploy to Vercel
+1. Push to GitHub.
+2. Import into Vercel.
+3. Add environment variables.
+4. Deploy.

@@ -1,7 +1,6 @@
-import { SectionTitle } from '../../lib/site-data';
 import Image from 'next/image';
-import { siteData } from '../../lib/site-data';
 import { MOTTO } from '../../config/site';
+import { SectionTitle, siteData } from '../../lib/site-data';
 
 export default function AboutPage() {
   return (

@@ -1,5 +1,4 @@
-import { SectionTitle } from '../../lib/site-data';
-import { siteData } from '../../lib/site-data';
+import { SectionTitle, siteData } from '../../lib/site-data';
 
 export default function AcademicsPage() {
   return (

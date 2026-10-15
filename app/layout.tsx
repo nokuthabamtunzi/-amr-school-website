@@ -1,39 +1,50 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { BookOpen, GraduationCap, Sparkles, Heart, CheckCircle2, ArrowRight } from 'lucide-react';
+import { ADDRESS, FACEBOOK_URL, GOOGLE_ACCOUNT_EMAIL, SCHOOL_EMAIL, SCHOOL_LOGO_PATHS, SCHOOL_PHONE } from '../config/site';
 
-export function SectionTitle({ eyebrow, title, description }: { eyebrow: string; title: string; description?: string }) {
+export default function Footer() {
   return (
-    <div style={{ marginBottom: '1.5rem' }}>
-      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-600">{eyebrow}</p>
-      <h2 className="mt-2 text-3xl md:text-4xl font-bold text-slate-900">{title}</h2>
-      {description ? <p className="mt-3 max-w-2xl text-slate-600">{description}</p> : null}
-    </div>
+    <footer className="mt-8 border-t border-sky-100 bg-white">
+      <div className="mx-auto max-w-7xl px-4 py-12 md:px-8">
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+          <div>
+            <h3 className="text-lg font-bold text-slate-900">AMR Primary School</h3>
+            <p className="mt-4 text-slate-600">A caring ECD and primary school where every child is nurtured to grow with confidence, joy and purpose.</p>
+          </div>
+          <div>
+            <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-600">Quick links</h4>
+            <ul className="mt-4 space-y-2 text-slate-600">
+              <li><Link href="/about">About Us</Link></li>
+              <li><Link href="/academics">Academics</Link></li>
+              <li><Link href="/admissions">Admissions</Link></li>
+              <li><Link href="/contact">Contact</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-600">Contact</h4>
+            <ul className="mt-4 space-y-2 text-slate-600">
+              <li>{ADDRESS}</li>
+              <li>{SCHOOL_EMAIL}</li>
+              <li>{SCHOOL_PHONE}</li>
+              <li>{GOOGLE_ACCOUNT_EMAIL}</li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-600">Follow us</h4>
+            <ul className="mt-4 space-y-2 text-slate-600">
+              <li><a href={FACEBOOK_URL}>Facebook</a></li>
+              <li><Link href="/gallery">Gallery</Link></li>
+              <li><Link href="/news">News & Events</Link></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="border-t border-sky-100 bg-sky-50 py-6">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-3 px-4 text-center md:px-8">
+          <img src={SCHOOL_LOGO_PATHS.branding} alt="My branding logo" className="h-20 w-20 opacity-60" />
+          <p className="text-sm text-slate-600">Website by Your Brand</p>
+        </div>
+      </div>
+    </footer>
   );
 }
-
-export function PrimaryButton({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <Link href={href} className="inline-flex items-center gap-2 rounded-full bg-sky-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-200 transition hover:bg-sky-600">
-      {children}
-      <ArrowRight size={16} />
-    </Link>
-  );
-}
-
-export function SecondaryButton({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <Link href={href} className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-sky-500 hover:text-sky-600">
-      {children}
-    </Link>
-  );
-}
-
-export const features = [
-  { icon: GraduationCap, title: 'Qualified Teachers', text: 'Dedicated professionals who inspire confidence, curiosity and academic growth.' },
-  { icon: Heart, title: 'Safe & Caring', text: 'A warm school culture built on respect, care and supportive relationships.' },
-  { icon: Sparkles, title: 'Modern Learning', text: 'Creative teaching methods, active learning and purposeful classroom experiences.' },
-  { icon: BookOpen, title: 'Arts & Sports', text: 'Balanced development through movement, music, performance and creative expression.' },
-  { icon: CheckCircle2, title: 'Values-Based', text: 'Christian principles and character education guide how we learn and serve.' },
-  { icon: CheckCircle2, title: 'Day School', text: 'Focused learning in a nurturing day-school environment with no boarding.' },
-];

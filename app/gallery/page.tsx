@@ -1,8 +1,8 @@
-import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 import { siteData } from '../../../lib/site-data';
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return siteData.news.map((item) => ({ slug: item.slug }));
 }
 

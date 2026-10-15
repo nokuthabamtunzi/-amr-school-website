@@ -1,19 +1,15 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { User, Lock, UploadCloud, Images, Newspaper, FileText, MessageSquareText, LogOut } from 'lucide-react';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
-  {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-    },
-  }
-);
+const supabaseClient =
+  process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    ? createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {
+        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+      })
+    : null;
 
 function StatCard({ label, value, icon: Icon }: { label: string; value: string; icon: any }) {
   return (
@@ -42,20 +38,22 @@ export default function AdminPage() {
   const [messageCount, setMessageCount] = useState('0');
 
   useEffect(() => {
-    const getSession = async () => {
-      const { data } = await supabase.auth.getSession();
+    const loadSession = async () => {
+      if (!supabaseClient) return;
+      const { data } = await supabaseClient.auth.getSession();
       setSession(data.session);
     };
-    getSession();
+    loadSession();
   }, []);
 
   useEffect(() => {
     const loadStats = async () => {
+      if (!supabaseClient) return;
       const [galleryRes, newsRes, appRes, msgRes] = await Promise.all([
-        supabase.from('gallery').select('*', { count: 'exact', head: true }),
-        supabase.from('news').select('*', { count: 'exact', head: true }),
-        supabase.from('applications').select('*', { count: 'exact', head: true }),
-        supabase.from('messages').select('*', { count: 'exact', head: true }),
+        supabaseClient.from('gallery').select('*', { count: 'exact', head: true }),
+        supabaseClient.from('news').select('*', { count: 'exact', head: true }),
+        supabaseClient.from('applications').select('*', { count: 'exact', head: true }),
+        supabaseClient.from('messages').select('*', { count: 'exact', head: true }),
       ]);
       setGalleryCount(String(galleryRes.count || 0));
       setNewsCount(String(newsRes.count || 0));
@@ -67,8 +65,12 @@ export default function AdminPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!supabaseClient) {
+      alert('Supabase env vars missing. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.');
+      return;
+    }
     setLoading(true);
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
     setLoading(false);
     if (error) {
       alert(error.message);
@@ -78,11 +80,16 @@ export default function AdminPage() {
   };
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    if (!supabaseClient) return;
+    await supabaseClient.auth.signOut();
     setSession(null);
   };
 
   const uploadPhotos = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!supabaseClient) {
+      setMessage('Supabase is not configured yet.');
+      return;
+    }
     const files = e.target.files;
     if (!files || files.length === 0) return;
     setUploading(true);
@@ -91,15 +98,10 @@ export default function AdminPage() {
     try {
       for (const file of Array.from(files)) {
         const path = `amr-${Date.now()}-${file.name}`;
-        const { error: uploadError } = await supabase.storage.from('amr-gallery').upload(path, file, { cacheControl: '3600', upsert: false });
+        const { error: uploadError } = await supabaseClient.storage.from('amr-gallery').upload(path, file, { cacheControl: '3600', upsert: false });
         if (uploadError) throw uploadError;
-        const publicUrl = supabase.storage.from('amr-gallery').getPublicUrl(path).data.publicUrl;
-        const { error: dbError } = await supabase.from('gallery').insert({
-          title: file.name,
-          category: 'AMR',
-          image_url: publicUrl,
-          is_hero: false,
-        });
+        const publicUrl = supabaseClient.storage.from('amr-gallery').getPublicUrl(path).data.publicUrl;
+        const { error: dbError } = await supabaseClient.from('gallery').insert({ title: file.name, category: 'AMR', image_url: publicUrl, is_hero: false });
         if (dbError) throw dbError;
       }
       setMessage('Photos uploaded successfully.');
@@ -111,16 +113,20 @@ export default function AdminPage() {
   };
 
   const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>, key: string) => {
+    if (!supabaseClient) {
+      alert('Supabase is not configured yet.');
+      return;
+    }
     const file = e.target.files?.[0];
     if (!file) return;
     const path = `${key}-${Date.now()}-${file.name}`;
-    const { error } = await supabase.storage.from('amr-logos').upload(path, file, { upsert: true, cacheControl: '3600' });
+    const { error } = await supabaseClient.storage.from('amr-logos').upload(path, file, { upsert: true, cacheControl: '3600' });
     if (error) {
       alert(error.message);
       return;
     }
-    const publicUrl = supabase.storage.from('amr-logos').getPublicUrl(path).data.publicUrl;
-    const { error: dbError } = await supabase.from('site_settings').upsert({ key, value: publicUrl });
+    const publicUrl = supabaseClient.storage.from('amr-logos').getPublicUrl(path).data.publicUrl;
+    const { error: dbError } = await supabaseClient.from('site_settings').upsert({ key, value: publicUrl }, { onConflict: 'key' });
     if (dbError) {
       alert(dbError.message);
       return;

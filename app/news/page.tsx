@@ -1,5 +1,4 @@
-import { SectionTitle } from '../../lib/site-data';
-import { siteData } from '../../lib/site-data';
+import { SectionTitle, siteData } from '../../lib/site-data';
 
 export default function CampusPage() {
   return (
@@ -17,7 +16,7 @@ export default function CampusPage() {
 
       <div className="mt-16 grid gap-8 md:grid-cols-2">
         <div className="rounded-[2rem] bg-sky-50 p-8 ring-1 ring-sky-100"><h3 className="text-2xl font-bold text-slate-900">Sports & clubs</h3><p className="mt-4 text-slate-700">Learners take part in sports, movement activities and enrichment programmes that build teamwork, health and resilience.</p></div>
-        <div className="rounded-[2rem] bg-slate-900 p-8 text-white"><h3 className="text-2xl font-bold">Library & reading</h3><p className="mt-4 text-slate-200">Our reading culture supports literacy, imagination and independent thinking, with age-appropriate resources for growing minds.</p></div>
+        <div className="rounded-[2rem] bg-slate-900 p-8 text-white"><h3 className="text-2xl font-bold">Library & reading</h3><p className="mt-4 text-slate-200">Our reading culture supports literacy, imagination and independent thinking, with resources designed for growing minds.</p></div>
       </div>
     </div>
   );

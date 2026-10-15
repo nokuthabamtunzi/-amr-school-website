@@ -1,7 +1,6 @@
-import Link from 'next/link';
 import Image from 'next/image';
-import { SectionTitle } from '../../lib/site-data';
-import { siteData } from '../../lib/site-data';
+import Link from 'next/link';
+import { SectionTitle, siteData } from '../../lib/site-data';
 
 export default function NewsPage() {
   return (
